@@ -1,5 +1,11 @@
+import Intro from "./components/intro/Intro";
+
 function App() {
-  return <div className="App">Hello World</div>;
+  return (
+    <div>
+      <Intro />
+    </div>
+  );
 }
 
 export default App;
