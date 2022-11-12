@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import "./contact.css";
 import Phone from "../../img/phone.png";
 import Email from "../../img/email.png";
@@ -7,8 +7,12 @@ import emailjs from "emailjs-com";
 import { ThemeContext } from "../../context";
 
 export default function Contact() {
-  const formRef = useRef();
+  const formRef = useRef(null);
   const [done, setDone] = useState(false);
+  // const [username, setUsername] = useState("");
+  // const [subject, setSubject] = useState("");
+  // const [email, setEmail] = useState("");
+  // const [textarea, setTextarea] = useState("");
   const theme = useContext(ThemeContext);
   const darkMode = theme.state.darkMode;
   const handleSubmit = (e) => {
@@ -25,13 +29,23 @@ export default function Contact() {
         (result) => {
           console.log(result.text);
           setDone(true);
-          formRef.current.value = "";
+          // setEmail("");
+          // setTextarea("");
+          // setUsername("");
+          // setSubject("");
+          e.target.reset();
         },
         (error) => {
           console.log(error.text);
         }
       );
   };
+  // const handleClick = () => {
+  //   formRef.current.value = "";
+  // };
+  useEffect(() => {
+    console.log(formRef);
+  });
   return (
     <div className="c">
       <div className="c-bg"></div>
@@ -64,24 +78,32 @@ export default function Contact() {
               type="text"
               placeholder="Name"
               name="user_name"
+              // value={username}
+              // onChange={(e) => setUsername(e.target.value)}
             />
             <input
               style={{ backgroundColor: darkMode && "#3333" }}
               type="text"
               placeholder="Subject"
               name="user_subject"
+              // value={subject}
+              // onChange={(e) => setSubject(e.target.value)}
             />
             <input
               style={{ backgroundColor: darkMode && "#3333" }}
               type="text"
               placeholder="Email"
               name="user_email"
+              // value={email}
+              // onChange={(e) => setEmail(e.target.value)}
             />
             <textarea
               style={{ backgroundColor: darkMode && "#3333" }}
               rows="5"
               placeholder="Message"
               name="message"
+              // value={textarea}
+              // onChange={(e) => setTextarea(e.target.value)}
             />
             <button>Submit</button>
             {done && "Thank you..."}
